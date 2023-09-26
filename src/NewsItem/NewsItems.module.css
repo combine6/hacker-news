@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 20px;
+    height: 90px;
+    border: 1px solid black;
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+}
+
+.link {
+    font-weight: 600;
+    font-size: 16px;
+
+    color: black;
+    text-decoration: none;
+}
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userData {
+    font-size: 12px;
+    color: black;
+}
+
+.score {
+    padding: 6px 12px;
+    background-color: gray;
+    color: white;
+    border-radius: 20px;
+}
+
+.container:last-child {
+    margin: 0;
+}
