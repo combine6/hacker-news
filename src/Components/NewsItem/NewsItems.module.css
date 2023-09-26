@@ -7,8 +7,6 @@
     height: 90px;
     border: 1px solid black;
     border-radius: 10px;
-
-    margin-bottom: 10px;
 }
 
 .link {
@@ -38,4 +36,19 @@
 
 .container:last-child {
     margin: 0;
+}
+
+.lowScore {
+    background-color: gray;
+    color: white;
+}
+
+.midScore {
+    background-color: #ffda60;
+    color: white;
+}
+
+.highScore {
+    background-color: #ff8175;
+    color: white;
 }
