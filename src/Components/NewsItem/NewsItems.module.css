@@ -16,6 +16,12 @@
     color: black;
     text-decoration: none;
 }
+
+.externalLink {
+    color: cornflowerblue;
+    cursor: pointer;
+}
+
 .info {
     display: flex;
     justify-content: space-between;

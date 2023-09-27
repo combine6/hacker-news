@@ -1,5 +1,5 @@
 import style from './NewsItems.module.css'
-import {unixToDate} from "../../utils/utils";
+import {domainToHostname, unixToDate, openExternalUrl} from "../../utils/utils";
 import {Link} from 'react-router-dom'
 
 export function NewsItems(props) {
@@ -13,6 +13,7 @@ export function NewsItems(props) {
         scoreClassArr.push(style.lowScore)
     }
 
+
     return (
         <div className={`${style.container} ${props.className}`}>
             <Link className={style.link} to={`comments/${props.id}`}>{props.title}</Link>
@@ -22,10 +23,13 @@ export function NewsItems(props) {
                     <span>{props.username} | </span>
                     <span>{unixToDate(props.date)}</span>
                 </div>
-
+                {props.url ? (
+                    <div className={style.externalLink} onClick={() => openExternalUrl(props.url)}>{domainToHostname(props.url)}</div>
+                ): (
                 <div className={scoreClassArr.join(' ')}>
                     {props.score} points
                 </div>
+                )}
             </div>
         </div>
     )
