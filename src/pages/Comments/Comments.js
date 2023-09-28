@@ -7,11 +7,29 @@ import {useEffect, useState} from "react";
 export function Comments() {
     const {id} = useParams()
     const [news, setNews] = useState()
+    const [comments, setComments] = useState([])
 
     async function getNewsData(newsId) {
         const newsData = await get(`https://hacker-news.firebaseio.com/v0/item/${newsId}.json?print=pretty`)
-        console.log(newsData)
         setNews(newsData)
+        if (newsData?.kids) {
+            const commentsData = getNewsComments(newsData.kids)
+            console.log(commentsData)
+        }
+
+    }
+
+    async function getNewsComments(commentsIds) {
+        return await Promise
+            .all(commentsIds.map(async commentsId =>
+            {
+                const comment = get(`https://hacker-news.firebaseio.com/v0/item/${commentsId}.json?print=pretty`)
+                if(comment?.kids) {
+                    comment.kids = await getNewsComments(comment.kids)
+                }
+
+                return comment
+            }))
     }
 
     useEffect(() => {
