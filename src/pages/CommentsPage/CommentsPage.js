@@ -1,10 +1,11 @@
 import {Link, useParams} from "react-router-dom";
-import {NewsList} from "../NewsList/NewsList";
+import {NewsListPage} from "../NewsListPage/NewsListPage";
 import {NewsItems} from "../../Components/NewsItem/NewsItems";
 import {get} from "../../api/api";
 import {useEffect, useState} from "react";
+import {CommentsWrapper} from "../../Components/Comments/CommentsWrapper";
 
-export function Comments() {
+export function CommentsPage() {
     const {id} = useParams()
     const [news, setNews] = useState()
     const [comments, setComments] = useState([])
@@ -13,8 +14,9 @@ export function Comments() {
         const newsData = await get(`https://hacker-news.firebaseio.com/v0/item/${newsId}.json?print=pretty`)
         setNews(newsData)
         if (newsData?.kids) {
-            const commentsData = getNewsComments(newsData.kids)
-            console.log(commentsData)
+            const commentsData = await getNewsComments(newsData.kids)
+
+            setComments(commentsData)
         }
 
     }
@@ -49,6 +51,9 @@ export function Comments() {
                 />
             )}
 
+            {comments && (
+                <CommentsWrapper comments={comments}/>
+            )}
 
         </div>
     )
